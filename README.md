@@ -7,7 +7,7 @@
 * Canedo Villarroe Juan Luis
 
 ## IMPORTANT! HOW TO USE 🔧
-* After cloning the repository enter the folder, open a git bash and put the following command: git checkout master, with           this command you will be able to see all the files 
+* After cloning the repository enter the folder, open a git bash and put the following command: git checkout main, with           this command you will be able to see all the files 
 * For the correct functioning of the code you first need to install "colorama" from the console with the following command:                   
              -python -m pip install colorama 
 * Insert the command 'python battleshipUI.py' to start the program.
