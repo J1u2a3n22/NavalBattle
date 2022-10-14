@@ -50,3 +50,72 @@ class Board:
     def is_sea_with_board(self,x,y,board):
         return board[y][x]==SEA
     
+    def put_ships_horizontally(self,enum_boat):
+        count=0
+        answer=True
+        filled_board=False
+        enum_value=enum_boat.value
+        if enum_boat.name=="S":
+           enum_value=3
+        while filled_board==False:
+            answer=True
+            x=self.get_random_x()
+            y=self.get_random_y()
+            x1=x
+            y1=y
+            while count<enum_value:
+                if self.is_in_range(x1,y1) and self.is_sea(x1,y1):
+                    x1=x1+1
+                    answer=answer and True
+                else:
+                    answer=answer and False
+                    break
+                count=count+1
+            if answer==True:
+                count=0
+                x1=x
+                y1=y
+                while count<enum_value:
+                    if self.is_in_range(x1,y1) and self.is_sea(x1,y1):
+                        self.board[y1][x1]=enum_boat.name
+                        x1=x1+1
+                    count=count+1
+                filled_board=True
+            else:
+                count=0
+        return self.board
+
+    def put_ships_vertically(self,enum_boat):
+        count=0
+        answer=True
+        filled_board=False
+        enum_value=enum_boat.value
+        if enum_boat.name=="S":
+           enum_value=3
+        while filled_board==False:
+            answer=True
+            x=self.get_random_x()
+            y=self.get_random_y()
+            x1=x
+            y1=y
+            while count<enum_value:
+                if self.is_in_range(x1,y1) and self.is_sea(x1,y1):
+                    y1=y1+1
+                    answer=answer and True
+                else:
+                    answer=answer and False
+                    break
+                count=count+1
+            if answer==True:
+                count=0
+                x1=x
+                y1=y
+                while count<enum_value:
+                    if self.is_in_range(x1,y1) and self.is_sea(x1,y1):
+                        self.board[y1][x1]=enum_boat.name
+                        y1=y1+1
+                    count=count+1
+                filled_board=True
+            else:
+                count=0
+        return self.board
