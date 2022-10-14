@@ -119,3 +119,34 @@ class Board:
             else:
                 count=0
         return self.board
+
+    def randomly_assign_ships(self):
+        self.board=self.put_ships_horizontally(Ships.D)
+        self.board=self.put_ships_horizontally(Ships.S)
+        self.board=self.put_ships_vertically(Ships.C)
+        self.board=self.put_ships_vertically(Ships.B)
+        self.board=self.put_ships_vertically(Ships.A)
+        return self.board
+
+    def shoot(self,x,y,enemy_board):
+        is_repeated=False
+        if self.is_sea_with_board(x,y,enemy_board):
+            enemy_board[y][x]=self.missed_shoot
+            return False,is_repeated
+        #If you shoot before, that counts as a failure
+        elif enemy_board[y][x] == self.missed_shoot or enemy_board[y][x] == self.successful_shoot:
+            is_repeated=True
+            return False,is_repeated
+        else:
+            enemy_board[y][x] = self.successful_shoot
+            return True,is_repeated
+
+    def all_sunken_ships(self,enemy_board):
+        for y in range(self.rows):
+            for x in range(self.columns):
+                cell = enemy_board[y][x]
+                # If it's not sea or a gunshot, it means there's still a ship out there.
+                if cell != SEA and cell != self.successful_shoot  and cell != self.missed_shoot:
+                    return False
+        # We just went through the whole matrix and did not return on the previous line. Then all the ships have been sunk
+        return True
